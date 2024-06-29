@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Task</title>
+    <style>
+        body{
+            background-color: rgb(36, 37, 38);
+            margin: 0;
+            padding:20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        h1{
+            color:whitesmoke ;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        form{
+            line-height: 40px;
+        }
+
+        form input[type="text"]{
+            width: 200px;
+            height:1vh;
+            padding:10px;
+            border-radius: 10px;
+            color:black;
+            background-color: rgb(252, 250, 252);
+        }
+
+        form label{
+            color:rgb(217, 247, 252);
+            font-size: large;
+        }
+
+        button{
+            padding:5px;
+            background-color: rgb(56, 52, 52);
+            color: aliceblue;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Add Task</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="radio" id="worker" name="user_type" value="worker" checked>
+        <label for="worker">Worker</label>
+        <input type="radio" id="tester" name="user_type" value="tester">
+        <label for="tester">Tester</label><br>
+        <button type="submit" class="task" >Add Task</button>
+    </form>
+</body>
+</html>

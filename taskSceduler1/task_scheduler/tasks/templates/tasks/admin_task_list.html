@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Task List</title>
+    <style>
+        body{
+            background-color: rgb(36, 37, 38);
+            margin: 0;
+            padding:20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+        }
+
+        h1{
+            color:whitesmoke ;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        ul{
+            color:rgb(253, 242, 254) ;
+            font-size: large;
+            line-height: 40px;
+            list-style: none;
+        }
+
+        span{
+            color: rgb(249, 192, 192);
+        }
+
+        li a{
+            color:rgb(217, 247, 252);
+            text-decoration: none;
+            background-color: rgb(31, 92, 93);
+            padding:5px;
+            font-size: medium;
+            border-radius: 10px;
+            margin:0
+        }
+
+        li a:hover{
+            color:rgb(10, 31, 255);
+        }
+
+        
+        a,button{
+            margin-left: 150px;
+            text-decoration: none;
+            color:aqua;
+            background-color: transparent;
+            border:0;
+            font-size: medium;
+        }
+
+        form{
+            margin-left: -100px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Admin Task List</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task.name }} - {{ task.due_date }} - <span>{{task.user_type}} </span> - 
+                
+                {% if task.completed %}Completed - <a href="{% url 'delete_task' task.id %}">Delete</a>{% else %}<a href="{% url 'edit_task' task.id %}">Edit</a> - 
+                <a href="{% url 'delete_task' task.id %}">Delete</a> - Pending{% endif %}
+                    
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <form method="post" action="{% url 'delete_all_tasks' %}">
+        {% csrf_token %}
+        <a href="{% url 'add_task' %}">Add Task</a>
+        <button type="submit" class="button">Delete All Tasks</button>
+    </form>
+    
+</body>
+</html>
